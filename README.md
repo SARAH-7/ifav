@@ -1,4 +1,4 @@
-# iFav – Ecosystem platform MVP
+# LaunchAxsi – Ecosystem platform MVP
 
 MVP for a founder–investor–startup ecosystem platform. Demonstrates **software architecture**, **database design**, **LLM/AI integration**, and **product thinking**.
 
@@ -7,13 +7,17 @@ MVP for a founder–investor–startup ecosystem platform. Demonstrates **softwa
 - **Dashboard** – Overview of startups, investors, events
 - **Startups** – Full CRUD; dynamic fields and validation (Zod)
 - **Investors** – Full CRUD; discovery by focus and check size
+- **Pipeline** – Deal flow Kanban tracking opportunities
 - **Dual flow** – Single view for founders (find investors) and investors (discover startups)
 - **Fundraising** – Rounds per startup
 - **Accelerator** – Programs and deadlines
+- **Community** – Curated networking directory
 - **Events** – Create and list events (webinars, meetups, demo days)
-- **Documents** – Pitch decks / one-pagers; **AI pitch analysis** (score 1–100, criteria scores, feedback, actionable suggestions)
-- **Messages** – Messaging list (MVP: read-only)
-- **AI Assistant** – Chat for startup advice, investor matching, pitch feedback
+- **Documents** – Pitch decks / one-pagers; **AI pitch analysis**
+- **Messages** – Split-pane threaded inbox
+- **AI Assistant** – Live chat with prompt chips for pitch feedback
+- **Architecture** – Visual diagram of the platform tech stack
+- **DB Schema** – Interactive visualization of Prisma models
 
 ## Tech stack
 
@@ -44,7 +48,7 @@ MVP for a founder–investor–startup ecosystem platform. Demonstrates **softwa
 
    ```bash
    cp .env.example .env
-   # Add OPENAI_API_KEY to .env for AI features
+   # Add GEMINI_API_KEY to .env for AI features
    npx prisma db push
    npm run db:seed
    ```
