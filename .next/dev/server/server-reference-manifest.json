@@ -7,17 +7,10 @@
           "async": false,
           "exportedName": "getStartups",
           "filename": "app/actions/startups.ts"
-        },
-        "app/(dashboard)/startups/page": {
-          "moduleId": "[project]/.next-internal/server/app/(dashboard)/startups/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/startups.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "getStartups",
-          "filename": "app/actions/startups.ts"
         }
       },
       "layer": {
-        "app/(dashboard)/dashboard/page": "rsc",
-        "app/(dashboard)/startups/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc"
       },
       "filename": "app/actions/startups.ts",
       "exportedName": "getStartups"
@@ -29,17 +22,10 @@
           "async": false,
           "exportedName": "deleteStartup",
           "filename": "app/actions/startups.ts"
-        },
-        "app/(dashboard)/startups/page": {
-          "moduleId": "[project]/.next-internal/server/app/(dashboard)/startups/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/startups.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "deleteStartup",
-          "filename": "app/actions/startups.ts"
         }
       },
       "layer": {
-        "app/(dashboard)/dashboard/page": "rsc",
-        "app/(dashboard)/startups/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc"
       },
       "filename": "app/actions/startups.ts",
       "exportedName": "deleteStartup"
@@ -51,17 +37,10 @@
           "async": false,
           "exportedName": "getStartupById",
           "filename": "app/actions/startups.ts"
-        },
-        "app/(dashboard)/startups/page": {
-          "moduleId": "[project]/.next-internal/server/app/(dashboard)/startups/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/startups.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "getStartupById",
-          "filename": "app/actions/startups.ts"
         }
       },
       "layer": {
-        "app/(dashboard)/dashboard/page": "rsc",
-        "app/(dashboard)/startups/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc"
       },
       "filename": "app/actions/startups.ts",
       "exportedName": "getStartupById"
@@ -73,17 +52,10 @@
           "async": false,
           "exportedName": "createStartup",
           "filename": "app/actions/startups.ts"
-        },
-        "app/(dashboard)/startups/page": {
-          "moduleId": "[project]/.next-internal/server/app/(dashboard)/startups/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/startups.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "createStartup",
-          "filename": "app/actions/startups.ts"
         }
       },
       "layer": {
-        "app/(dashboard)/dashboard/page": "rsc",
-        "app/(dashboard)/startups/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc"
       },
       "filename": "app/actions/startups.ts",
       "exportedName": "createStartup"
@@ -95,17 +67,10 @@
           "async": false,
           "exportedName": "updateStartup",
           "filename": "app/actions/startups.ts"
-        },
-        "app/(dashboard)/startups/page": {
-          "moduleId": "[project]/.next-internal/server/app/(dashboard)/startups/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/startups.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "updateStartup",
-          "filename": "app/actions/startups.ts"
         }
       },
       "layer": {
-        "app/(dashboard)/dashboard/page": "rsc",
-        "app/(dashboard)/startups/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc"
       },
       "filename": "app/actions/startups.ts",
       "exportedName": "updateStartup"
