@@ -76,7 +76,7 @@ export default function DocumentsPage() {
               </div>
             </div>
             <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button className="px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 text-xs font-bold hover:bg-blue-500/40 hover:text-white transition-colors">
+              <button onClick={() => setShowAnalysis(true)} className="px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 text-xs font-bold hover:bg-blue-500/40 hover:text-white transition-colors">
                 View Analysis
               </button>
             </div>

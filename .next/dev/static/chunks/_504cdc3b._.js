@@ -19,16 +19,16 @@ var _s = __turbopack_context__.k.signature();
 ;
 const PROMPT_CHIPS = [
     "Summarize our latest seed deck",
-    "Compare our CAC to SaaS benchmarks",
-    "Generate an intro email to Nexus Ventures",
-    "Suggest 3 improvements for our 'Why Now' slide"
+    "Suggest 3 improvements for our 'Why Now' slide",
+    "Is my TAM slide convincing?",
+    "Analyze our go-to-market strategy slide"
 ];
 function AiAssistantPage() {
     _s();
     const [messages, setMessages] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([
         {
             role: "assistant",
-            content: "Hi! I'm your LaunchAxis AI co-pilot. I can analyze your documents, draft investor communications, or answer questions about your ecosystem. How can I help you today?"
+            content: "Hi! I'm your LaunchAxis AI co-pilot, specialized in Pitch Deck Review. I can analyze your presentation materials, give feedback on your slides, or answer questions about your narrative. How can I help you shape your pitch today?"
         }
     ]);
     const [input, setInput] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -46,11 +46,20 @@ function AiAssistantPage() {
         setIsTyping(true);
         // Mock AI response delay
         setTimeout(()=>{
-            let reply = "I can certainly help with that. Based on your current profile data, I've analyzed your request and prepared a thorough breakdown for you.";
-            if (text.includes("intro email")) {
-                reply = "Subject: AcmeCorp (B2B SaaS) - Disrupting enterprise procurement\n\nHi Nexus Team,\n\nI noticed you recently led the Series A in SupplyLink. We are building the next generation of procurement automation for mid-market...\n\n(I've kept it concise as VCs prefer brief, traction-focused intros.)";
-            } else if (text.includes("CAC")) {
-                reply = "Your current CAC is $450, with an LTV of $3,200 (LTV:CAC ratio of 7.1x). This is extremely strong! The SaaS benchmark for Seed-stage companies is generally around 3x. Highlight this efficiency in your next investor update.";
+            let reply = "I can certainly help with that. Based on your current pitch deck, I've analyzed your presentation and prepared a breakdown for you.";
+            const lowerText = text.toLowerCase();
+            if (lowerText.includes("why now")) {
+                reply = "Looking at your 'Why Now' slide, here are 3 improvements:\n1. Tie the recent regulatory changes directly to your solution.\n2. Add a visual timeline showing market adoption accelerating.\n3. Emphasize the cost of *inaction* for your target enterprise customers.";
+            } else if (lowerText.includes("tam") || lowerText.includes("market")) {
+                reply = "Your TAM slide relies on top-down calculations (e.g., '1% of a $10B market'). Investors prefer bottom-up TAM. Try calculating it as: [Number of Target Customers] × [Annual Contract Value]. This shows a much deeper understanding of your actual buyer persona.";
+            } else if (lowerText.includes("summarize") || lowerText.includes("deck")) {
+                reply = "Based on your latest seed deck:\n- Problem: Procurement is slow and fragmented.\n- Solution: AI-automated vendor onboarding.\n- Traction: $12k MRR growing 15% MoM.\n- Ask: $1.5M Seed to scale GTM.\n\nYour narrative is strong, but the transition from Solution to Traction could be smoother.";
+            } else if (lowerText.includes("hello") || lowerText.includes("hi ") || lowerText === "hi" || lowerText.includes("hey")) {
+                reply = "Hello! I am ready to review your pitch deck. Please ask me specific questions about your slides or let me summarize them for you.";
+            } else if (lowerText.includes("improve") && (lowerText.includes("document") || lowerText.includes("pitch") || lowerText.includes("presentation") || lowerText.includes("slide"))) {
+                reply = "To improve your pitch deck, I recommend focusing on clear problem/solution articulation, a strong 'Why Now', and a bottom-up TAM. Could you specify which slide you want me to review?";
+            } else {
+                reply = "Sorry, can't provide this information. Ask me anything else related to the pitch.";
             }
             setMessages((prev)=>[
                     ...prev,
@@ -76,17 +85,17 @@ function AiAssistantPage() {
                                 className: "h-6 w-6 text-white"
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 49,
+                                lineNumber: 59,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                            lineNumber: 48,
+                            lineNumber: 58,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                        lineNumber: 47,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -96,7 +105,7 @@ function AiAssistantPage() {
                                 children: "LaunchAxis AI"
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 53,
+                                lineNumber: 63,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -104,19 +113,19 @@ function AiAssistantPage() {
                                 children: "Powered by Gemini & Claude Intelligence"
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 54,
+                                lineNumber: 64,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                        lineNumber: 52,
+                        lineNumber: 62,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                lineNumber: 46,
+                lineNumber: 56,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -131,12 +140,12 @@ function AiAssistantPage() {
                                         className: "h-4 w-4 text-white"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 64,
+                                        lineNumber: 74,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                    lineNumber: 63,
+                                    lineNumber: 73,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -144,7 +153,7 @@ function AiAssistantPage() {
                                     children: msg.content
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                    lineNumber: 68,
+                                    lineNumber: 78,
                                     columnNumber: 13
                                 }, this),
                                 msg.role === "user" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -153,18 +162,18 @@ function AiAssistantPage() {
                                         className: "h-4 w-4 text-blue-300"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 78,
+                                        lineNumber: 87,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                    lineNumber: 77,
+                                    lineNumber: 86,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, idx, true, {
                             fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                            lineNumber: 61,
+                            lineNumber: 71,
                             columnNumber: 11
                         }, this)),
                     isTyping && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -176,12 +185,12 @@ function AiAssistantPage() {
                                     className: "h-4 w-4 text-white"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 96,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 86,
+                                lineNumber: 95,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -191,39 +200,39 @@ function AiAssistantPage() {
                                         className: "h-2 w-2 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.3s]"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 99,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "h-2 w-2 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 91,
+                                        lineNumber: 100,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "h-2 w-2 bg-accent rounded-full animate-bounce"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 92,
+                                        lineNumber: 101,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 89,
+                                lineNumber: 98,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                        lineNumber: 85,
+                        lineNumber: 94,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                lineNumber: 59,
+                lineNumber: 69,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -239,7 +248,7 @@ function AiAssistantPage() {
                                         className: "h-3 w-3"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 109,
+                                        lineNumber: 118,
                                         columnNumber: 15
                                     }, this),
                                     " ",
@@ -247,12 +256,12 @@ function AiAssistantPage() {
                                 ]
                             }, idx, true, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 104,
+                                lineNumber: 113,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                        lineNumber: 102,
+                        lineNumber: 111,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -263,11 +272,11 @@ function AiAssistantPage() {
                                 value: input,
                                 onChange: (e)=>setInput(e.target.value),
                                 onKeyDown: (e)=>e.key === "Enter" && handleSend(input),
-                                placeholder: "Ask AI to analyze data, draft emails, or review documents...",
+                                placeholder: "Ask AI to review your latest slides, structure your narrative, or analyze your pitch...",
                                 className: "flex-1 rounded-xl bg-black/20 border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-blue-200/50"
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 115,
+                                lineNumber: 124,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -280,35 +289,35 @@ function AiAssistantPage() {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                        lineNumber: 128,
+                                        lineNumber: 137,
                                         columnNumber: 18
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                                lineNumber: 123,
+                                lineNumber: 132,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                        lineNumber: 114,
+                        lineNumber: 123,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-                lineNumber: 99,
+                lineNumber: 108,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/(dashboard)/ai-assistant/page.tsx",
-        lineNumber: 43,
+        lineNumber: 53,
         columnNumber: 5
     }, this);
 }
-_s(AiAssistantPage, "BhMCmPJzEn//oTLK4gdKXSdbAh0=");
+_s(AiAssistantPage, "cAxc6OMtcYpbhcyDzd4xnGah8Us=");
 _c = AiAssistantPage;
 var _c;
 __turbopack_context__.k.register(_c, "AiAssistantPage");

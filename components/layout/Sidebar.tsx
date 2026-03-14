@@ -16,7 +16,9 @@ import {
   Banknote,
   GraduationCap,
   Database,
-  Network
+  Network,
+  BookOpen,
+  FileText
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +33,7 @@ const ecosystemNav = [
   { href: "/dual-flow", label: "Dual Flow", icon: ArrowRightLeft },
   { href: "/fundraising", label: "Fundraising", icon: Banknote },
   { href: "/accelerator", label: "Accelerator", icon: GraduationCap },
+  { href: "/documents", label: "Documents", icon: FileText },
 ];
 
 const connectNav = [

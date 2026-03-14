@@ -5,33 +5,43 @@ import { Sparkles, Send, Bot, User, ArrowRight } from "lucide-react";
 
 const PROMPT_CHIPS = [
   "Summarize our latest seed deck",
-  "Compare our CAC to SaaS benchmarks",
-  "Generate an intro email to Nexus Ventures",
-  "Suggest 3 improvements for our 'Why Now' slide"
+  "Suggest 3 improvements for our 'Why Now' slide",
+  "Is my TAM slide convincing?",
+  "Analyze our go-to-market strategy slide"
 ];
 
 export default function AiAssistantPage() {
   const [messages, setMessages] = useState<{ role: "user" | "assistant", content: string }[]>([
-    { role: "assistant", content: "Hi! I'm your LaunchAxis AI co-pilot. I can analyze your documents, draft investor communications, or answer questions about your ecosystem. How can I help you today?" }
+    { role: "assistant", content: "Hi! I'm your LaunchAxis AI co-pilot, specialized in Pitch Deck Review. I can analyze your presentation materials, give feedback on your slides, or answer questions about your narrative. How can I help you shape your pitch today?" }
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
-    
+
     setMessages(prev => [...prev, { role: "user", content: text }]);
     setInput("");
     setIsTyping(true);
 
     // Mock AI response delay
     setTimeout(() => {
-      let reply = "I can certainly help with that. Based on your current profile data, I've analyzed your request and prepared a thorough breakdown for you.";
-      
-      if (text.includes("intro email")) {
-        reply = "Subject: AcmeCorp (B2B SaaS) - Disrupting enterprise procurement\n\nHi Nexus Team,\n\nI noticed you recently led the Series A in SupplyLink. We are building the next generation of procurement automation for mid-market...\n\n(I've kept it concise as VCs prefer brief, traction-focused intros.)";
-      } else if (text.includes("CAC")) {
-        reply = "Your current CAC is $450, with an LTV of $3,200 (LTV:CAC ratio of 7.1x). This is extremely strong! The SaaS benchmark for Seed-stage companies is generally around 3x. Highlight this efficiency in your next investor update.";
+      let reply = "I can certainly help with that. Based on your current pitch deck, I've analyzed your presentation and prepared a breakdown for you.";
+
+      const lowerText = text.toLowerCase();
+
+      if (lowerText.includes("why now")) {
+        reply = "Looking at your 'Why Now' slide, here are 3 improvements:\n1. Tie the recent regulatory changes directly to your solution.\n2. Add a visual timeline showing market adoption accelerating.\n3. Emphasize the cost of *inaction* for your target enterprise customers.";
+      } else if (lowerText.includes("tam") || lowerText.includes("market")) {
+        reply = "Your TAM slide relies on top-down calculations (e.g., '1% of a $10B market'). Investors prefer bottom-up TAM. Try calculating it as: [Number of Target Customers] × [Annual Contract Value]. This shows a much deeper understanding of your actual buyer persona.";
+      } else if (lowerText.includes("summarize") || lowerText.includes("deck")) {
+        reply = "Based on your latest seed deck:\n- Problem: Procurement is slow and fragmented.\n- Solution: AI-automated vendor onboarding.\n- Traction: $12k MRR growing 15% MoM.\n- Ask: $1.5M Seed to scale GTM.\n\nYour narrative is strong, but the transition from Solution to Traction could be smoother.";
+      } else if (lowerText.includes("hello") || lowerText.includes("hi ") || lowerText === "hi" || lowerText.includes("hey")) {
+        reply = "Hello! I am ready to review your pitch deck. Please ask me specific questions about your slides or let me summarize them for you.";
+      } else if (lowerText.includes("improve") && (lowerText.includes("document") || lowerText.includes("pitch") || lowerText.includes("presentation") || lowerText.includes("slide"))) {
+        reply = "To improve your pitch deck, I recommend focusing on clear problem/solution articulation, a strong 'Why Now', and a bottom-up TAM. Could you specify which slide you want me to review?";
+      } else {
+        reply = "Sorry, can't provide this information. Ask me anything else related to the pitch.";
       }
 
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
@@ -41,7 +51,7 @@ export default function AiAssistantPage() {
 
   return (
     <div className="h-[calc(100vh-theme(spacing.16))] md:h-[calc(100vh-theme(spacing.8))] max-w-4xl mx-auto flex flex-col p-4 md:p-6 overflow-hidden">
-      
+
       {/* Header */}
       <div className="bg-blue-950/60 border border-white/10 rounded-t-3xl p-6 backdrop-blur-md flex items-center gap-4 shrink-0 shadow-[0_10px_30px_rgba(0,0,0,0.5)] z-10 relative">
         <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20 p-0.5">
@@ -64,12 +74,11 @@ export default function AiAssistantPage() {
                 <Bot className="h-4 w-4 text-white" />
               </div>
             )}
-            
-            <div className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed whitespace-pre-wrap ${
-              msg.role === "user" 
-                ? "bg-blue-600 text-white rounded-tr-none shadow-lg" 
+
+            <div className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "user"
+                ? "bg-blue-600 text-white rounded-tr-none shadow-lg"
                 : "bg-white/5 border border-white/10 text-slate-200 rounded-tl-none shadow-lg shadow-black/20"
-            }`}>
+              }`}>
               {msg.content}
             </div>
 
@@ -80,7 +89,7 @@ export default function AiAssistantPage() {
             )}
           </div>
         ))}
-        
+
         {isTyping && (
           <div className="flex gap-4">
             <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shrink-0 shadow-lg mt-1">
@@ -97,7 +106,7 @@ export default function AiAssistantPage() {
 
       {/* Input Area */}
       <div className="bg-blue-950/60 border border-white/10 rounded-b-3xl p-6 backdrop-blur-md shrink-0 z-10 relative">
-        
+
         {/* Chips */}
         <div className="flex flex-wrap gap-2 mb-4">
           {PROMPT_CHIPS.map((chip, idx) => (
@@ -117,10 +126,10 @@ export default function AiAssistantPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend(input)}
-            placeholder="Ask AI to analyze data, draft emails, or review documents..."
+            placeholder="Ask AI to review your latest slides, structure your narrative, or analyze your pitch..."
             className="flex-1 rounded-xl bg-black/20 border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-blue-200/50"
           />
-          <button 
+          <button
             onClick={() => handleSend(input)}
             disabled={!input.trim()}
             className="px-6 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-bold flex items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20"
