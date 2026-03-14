@@ -1,9 +1,1 @@
-[00:00:01.599] Server  LOG     ✓ Ready in 1100ms
-[00:03:10.506] Server  LOG     ✓ Compiled in 719ms
-[00:07:12.544] Server  LOG     ✓ Compiled in 74ms
-[00:08:15.768] Server  LOG     prisma:query "SELECT `main`.`Startup`.`id`, `main`.`Startup`.`name`, `main`.`Startup`.`tagline`, `main`.`Startup`.`description`, `main`.`Startup`.`stage`, `main`.`Startup`.`industry`, `main`.`Startup`.`website`, `main`.`Startup`.`logoUrl`, `main`.`Startup`.`location`, `main`.`Startup`.`foundedYear`, `main`.`Startup`.`teamSize`, `main`.`Startup`.`founderId`, `main`.`Startup`.`createdAt`, `main`.`Startup`.`updatedAt` FROM `main`.`Startup` WHERE 1=1 ORDER BY `main`.`Startup`.`updatedAt` DESC LIMIT ? OFFSET ?"
-[00:08:15.768] Server  LOG     prisma:query "SELECT `main`.`Investor`.`id`, `main`.`Investor`.`name`, `main`.`Investor`.`firm`, `main`.`Investor`.`title`, `main`.`Investor`.`email`, `main`.`Investor`.`linkedInUrl`, `main`.`Investor`.`checkSizeMin`, `main`.`Investor`.`checkSizeMax`, `main`.`Investor`.`focusAreas`, `main`.`Investor`.`stages`, `main`.`Investor`.`userId`, `main`.`Investor`.`createdAt`, `main`.`Investor`.`updatedAt` FROM `main`.`Investor` WHERE 1=1 ORDER BY `main`.`Investor`.`updatedAt` DESC LIMIT ? OFFSET ?"
-[00:08:15.768] Server  LOG     prisma:query "SELECT `main`.`Event`.`id`, `main`.`Event`.`title`, `main`.`Event`.`description`, `main`.`Event`.`startDate`, `main`.`Event`.`endDate`, `main`.`Event`.`location`, `main`.`Event`.`type`, `main`.`Event`.`link`, `main`.`Event`.`createdAt`, `main`.`Event`.`updatedAt` FROM `main`.`Event` WHERE 1=1 ORDER BY `main`.`Event`.`startDate` DESC LIMIT ? OFFSET ?"
-[00:08:15.773] Server  LOG     prisma:query "SELECT `main`.`User`.`id`, `main`.`User`.`name`, `main`.`User`.`email` FROM `main`.`User` WHERE `main`.`User`.`id` IN (?,?,?) LIMIT ? OFFSET ?"
-[00:09:36.893] Server  LOG     ✓ Compiled in 53ms
-[00:11:41.413] Server  LOG     ✓ Compiled in 35ms
+[00:00:01.155] Server  LOG     ✓ Ready in 872ms
