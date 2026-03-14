@@ -1,0 +1,8 @@
+{
+  "/(dashboard)/accelerator/page": "app/(dashboard)/accelerator/page.js",
+  "/(dashboard)/ai-assistant/page": "app/(dashboard)/ai-assistant/page.js",
+  "/(dashboard)/architecture/page": "app/(dashboard)/architecture/page.js",
+  "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
+  "/(dashboard)/db-schema/page": "app/(dashboard)/db-schema/page.js",
+  "/(dashboard)/startups/page": "app/(dashboard)/startups/page.js"
+}

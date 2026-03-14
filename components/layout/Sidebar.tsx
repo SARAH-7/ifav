@@ -14,7 +14,9 @@ import {
   Sparkles,
   ArrowRightLeft,
   Banknote,
-  GraduationCap
+  GraduationCap,
+  Database,
+  Network
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +38,11 @@ const connectNav = [
   { href: "/community", label: "Community", icon: Users },
   { href: "/events", label: "Events", icon: Calendar },
   { href: "/ai-assistant", label: "AI Assistant", icon: Sparkles },
+];
+
+const architectureNav = [
+  { href: "/architecture", label: "Architecture", icon: Network },
+  { href: "/db-schema", label: "DB Schema", icon: Database },
 ];
 
 export function Sidebar() {
@@ -113,6 +120,32 @@ export function Sidebar() {
             Connect
           </div>
           {connectNav.map((item) => {
+            const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all group",
+                  isActive 
+                    ? "bg-gradient-to-r from-primary/10 to-accent/10 border-l-2 border-primary text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" 
+                    : "text-blue-300 hover:bg-white/5 hover:text-white"
+                )}
+              >
+                <Icon className={cn("h-4 w-4", isActive ? "text-accent" : "text-purple-300 group-hover:text-blue-200")} />
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Architecture Section */}
+        <div className="flex flex-col gap-2">
+          <div className="px-3 text-xs font-semibold uppercase tracking-wider text-blue-300 dark:text-purple-300 mb-1">
+            Architecture
+          </div>
+          {architectureNav.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
             const Icon = item.icon;
             return (
