@@ -1,0 +1,207 @@
+// Ecosystem platform: founders, investors, startups, developers
+// Demonstrates: normalized entities, relations, JSON for flexible scoring
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum UserRole {
+  founder
+  investor
+  developer
+  admin
+}
+
+enum StartupStage {
+  idea
+  pre_seed
+  seed
+  series_a
+  series_b
+  growth
+}
+
+enum DocumentType {
+  pitch_deck
+  one_pager
+  financials
+  other
+}
+
+enum ConnectionStatus {
+  pending
+  accepted
+  declined
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      UserRole @default(founder)
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  startupsAsFounder   Startup[]
+  investorProfile     Investor?
+  sentMessages        Message[]     @relation("SentMessages")
+  receivedMessages    Message[]     @relation("ReceivedMessages")
+  connectionsFrom     Connection[]  @relation("ConnectionFrom")
+  connectionsTo       Connection[]  @relation("ConnectionTo")
+  assistantChats      AssistantChat[]
+}
+
+model Startup {
+  id          String        @id @default(cuid())
+  name        String
+  tagline     String?
+  description String?
+  stage       StartupStage  @default(idea)
+  industry    String?
+  website     String?
+  logoUrl     String?
+  location    String?
+  foundedYear Int?
+  teamSize    Int?
+  founderId   String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  founder           User                @relation(fields: [founderId], references: [id], onDelete: Cascade)
+  documents         Document[]
+  fundraisingRounds FundraisingRound[]
+}
+
+model Investor {
+  id            String   @id @default(cuid())
+  name          String
+  firm          String?
+  title         String?
+  email         String?
+  linkedInUrl   String?
+  checkSizeMin  Int?     // in thousands
+  checkSizeMax  Int?     // in thousands
+  focusAreas    Json     // e.g. ["fintech", "healthtech"] (SQLite-compat)
+  stages        Json     // e.g. ["seed", "series_a"]
+  userId        String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime?
+  location    String?
+  type        String?  // webinar, meetup, demo_day
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id         String       @id @default(cuid())
+  startupId  String
+  type       DocumentType @default(pitch_deck)
+  name       String
+  storageKey String?      // S3 key or file path for MVP
+  mimeType   String?
+  sizeBytes  Int?
+  createdAt  DateTime     @default(now())
+
+  startup  Startup           @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  analyses PitchDeckAnalysis[]
+}
+
+model PitchDeckAnalysis {
+  id            String   @id @default(cuid())
+  documentId    String
+  overallScore  Int      // 1-100
+  criteriaScores Json?   // { "problem": 85, "solution": 90, "market": 70, ... }
+  feedback      String?
+  suggestions   Json     // actionable improvement list (string[])
+  modelUsed     String?  // e.g. gpt-4o
+  createdAt     DateTime @default(now())
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model FundraisingRound {
+  id             String   @id @default(cuid())
+  startupId      String
+  amountTarget   Int?     // in thousands
+  amountRaised   Int?     // in thousands
+  stage          String?
+  targetCloseDate DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  startup Startup @relation(fields: [startupId], references: [id], onDelete: Cascade)
+}
+
+model AcceleratorProgram {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  deadline    DateTime?
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Message {
+  id         String    @id @default(cuid())
+  senderId   String
+  recipientId String
+  content    String
+  readAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  sender    User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  recipient User @relation("ReceivedMessages", fields: [recipientId], references: [id], onDelete: Cascade)
+}
+
+model Connection {
+  id        String           @id @default(cuid())
+  fromUserId String
+  toUserId   String
+  status    ConnectionStatus @default(pending)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  fromUser User @relation("ConnectionFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser   User @relation("ConnectionTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@unique([fromUserId, toUserId])
+}
+
+model AssistantChat {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String?  @default("New chat")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages AssistantMessage[]
+}
+
+model AssistantMessage {
+  id        String   @id @default(cuid())
+  chatId    String
+  role      String   // user | assistant
+  content   String
+  createdAt DateTime @default(now())
+
+  chat AssistantChat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+}
